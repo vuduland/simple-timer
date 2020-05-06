@@ -9,19 +9,19 @@ function App() {
     current: 0,
     end: 0,
     total: 0,
-
     minutes() {
       return Math.floor((this.elapsed() / 60000) % 60);
     },
     seconds() {
       return Math.floor((this.elapsed() / 1000) % 60);
     },
+    miliseconds() {
+      return Math.floor(this.elapsed() % 60);
+    },
     difference() {
       return this.current - this.start;
     },
     elapsed() {
-      // const totally =
-      // this.time -= (this.current - this.start)
       return this.time - (this.current - this.start);
     },
   });
@@ -53,14 +53,12 @@ function App() {
     <div>
       <div className='container'>
         <div className='timerblock'>
-          <span>Time:</span>
-          <span>
-            {timer.total}
-            <br></br>
-            {timer.minutes()}:{timer.seconds().toFixed(0)}
-            <br></br>
-            {timer.elapsed().toFixed(0)}
-          </span>
+          <div className='top'>
+            <span>Time:</span>
+            <span className='time'>
+              {timer.minutes()}:{timer.seconds().toFixed(0)}:{timer.miliseconds().toFixed(0)}
+            </span>
+          </div>
           <div className='bottom'>
             <button
               onClick={() => setTimerActive(timerActive === 'active' ? 'stopped' : 'starting')}>
@@ -74,5 +72,6 @@ function App() {
 }
 // :{timer.miliseconds().toFixed(0)}
 console.log(`Date.now() === ${Date.now()}`);
+// "We made a timer an hour ago. But this timer is far superior. -- Marc Farias Jones"
 
 export default App;
