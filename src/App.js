@@ -16,8 +16,13 @@ function App() {
     seconds() {
       return Math.floor((this.elapsed() / 1000) % 60);
     },
+    difference() {
+      return this.current - this.start;
+    },
     elapsed() {
-      return (this.time - (this.current - this.start);
+      // const totally =
+      // this.time -= (this.current - this.start)
+      return this.time - (this.current - this.start);
     },
   });
   const [timerActive, setTimerActive] = useState('stopped');
@@ -26,7 +31,11 @@ function App() {
 
   useEffect(() => {
     if (timerActive === 'starting') {
-      setTimer({ ...timer, total: timer.total + timer.elapsed(), start: Date.now() });
+      setTimer({
+        ...timer,
+        total: timer.total + timer.difference(),
+        start: Date.now() - timer.difference(),
+      });
       setTimerActive('active');
     }
     handleTimerChange = setTimeout(() => {
@@ -46,6 +55,8 @@ function App() {
         <div className='timerblock'>
           <span>Time:</span>
           <span>
+            {timer.total}
+            <br></br>
             {timer.minutes()}:{timer.seconds().toFixed(0)}
             <br></br>
             {timer.elapsed().toFixed(0)}
