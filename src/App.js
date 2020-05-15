@@ -10,41 +10,36 @@ function App() {
     end: 0,
     total: 0,
     minutes() {
-      const minutess = Math.floor((this.elapsed() / 60000) % 60);
-      console.log(`Minutes: ${minutess}`);
-      return minutess;
-      // Math.floor((this.elapsed() / 60000) % 60);
+      const minutes = Math.floor((this.remaining() / 60000) % 60);
+      // console.log(`Minutes: ${minutes}`);
+      return minutes;
     },
     seconds() {
-      const secondss = Math.floor((this.elapsed() / 1000) % 60);
-      console.log(`Seconds: ${secondss}`);
-      return secondss;
-      // return Math.floor((this.elapsed() / 1000) % 60);
+      const seconds = Math.floor((this.remaining() / 1000) % 60);
+      // console.log(`Seconds: ${seconds}`);
+      return seconds;
     },
-    miliseconds() {
-      const milliseconds = Math.floor(this.elapsed() % 60);
-      console.log(`Milliseconds: ${milliseconds}`);
+    milliseconds() {
+      const milliseconds = Math.floor(this.remaining() % 60);
+      // console.log(`Milliseconds: ${milliseconds}`);
       return milliseconds;
-      // return Math.floor(this.elapsed() % 60);
     },
     difference() {
       const diff = this.current - this.start;
-      console.log(`Difference: ${diff}`);
+      // console.log(`Difference: ${diff}`);
       return diff;
-      // return this.current - this.start;
     },
-    elapsed() {
-      const elapsed = this.time - (this.current - this.start);
-      console.log(`Elapsed: ${elapsed}`);
-      return elapsed;
-      // return this.time - (this.current - this.start);
+    remaining() {
+      const remaining = this.time - (this.current - this.start);
+      // console.log(`Elapsed: ${remaining}`);
+      return remaining;
     },
   });
+
   const [timerActive, setTimerActive] = useState('stopped');
 
-  let handleTimerChange = null;
-
   useEffect(() => {
+    let handleTimerChange = null;
     if (timerActive === 'starting') {
       setTimer({
         ...timer,
@@ -55,7 +50,7 @@ function App() {
     }
     handleTimerChange = setTimeout(() => {
       if (timerActive === 'active') {
-        setTimer({ ...timer, current: Date.now() }); // Date.now() === miliseconds?
+        setTimer({ ...timer, current: Date.now() }); // Date.now() === milliseconds?
       }
     }, 1);
     if (timerActive === 'stopped') {
@@ -71,7 +66,8 @@ function App() {
           <div className='top'>
             <span>Time:</span>
             <span className='time'>
-              {timer.minutes()}:{timer.seconds().toFixed(0)}:{timer.miliseconds().toFixed(0)}
+              {timer.minutes().toFixed(0)}:{timer.seconds().toFixed(0)}:
+              {timer.milliseconds().toFixed(0)}
             </span>
           </div>
           <div className='bottom'>
@@ -85,7 +81,7 @@ function App() {
     </div>
   );
 }
-// :{timer.miliseconds().toFixed(0)}
+// :{timer.milliseconds().toFixed(0)}
 console.log(`Date.now() === ${Date.now()}`);
 // "We made a timer an hour ago. But this timer is far superior. -- Marc Farias Jones"
 
