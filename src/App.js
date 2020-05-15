@@ -10,19 +10,34 @@ function App() {
     end: 0,
     total: 0,
     minutes() {
-      return Math.floor((this.elapsed() / 60000) % 60);
+      const minutess = Math.floor((this.elapsed() / 60000) % 60);
+      console.log(`Minutes: ${minutess}`);
+      return minutess;
+      // Math.floor((this.elapsed() / 60000) % 60);
     },
     seconds() {
-      return Math.floor((this.elapsed() / 1000) % 60);
+      const secondss = Math.floor((this.elapsed() / 1000) % 60);
+      console.log(`Seconds: ${secondss}`);
+      return secondss;
+      // return Math.floor((this.elapsed() / 1000) % 60);
     },
     miliseconds() {
-      return Math.floor(this.elapsed() % 60);
+      const milliseconds = Math.floor(this.elapsed() % 60);
+      console.log(`Milliseconds: ${milliseconds}`);
+      return milliseconds;
+      // return Math.floor(this.elapsed() % 60);
     },
     difference() {
-      return this.current - this.start;
+      const diff = this.current - this.start;
+      console.log(`Difference: ${diff}`);
+      return diff;
+      // return this.current - this.start;
     },
     elapsed() {
-      return this.time - (this.current - this.start);
+      const elapsed = this.time - (this.current - this.start);
+      console.log(`Elapsed: ${elapsed}`);
+      return elapsed;
+      // return this.time - (this.current - this.start);
     },
   });
   const [timerActive, setTimerActive] = useState('stopped');
